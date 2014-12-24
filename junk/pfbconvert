@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PATH=/usr/local/bin:$PATH
+FONTFORGE_LANGUAGE=ff
+export PATH FONTFORGE_LANGUAGE
+
+if (test -f $1); then ./pfb2otf $1; fi
