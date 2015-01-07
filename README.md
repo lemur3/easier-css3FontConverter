@@ -48,9 +48,9 @@ For many fonts go inside of the fonts folder and run something like this:
 
 2. Use CSS3FontConverter to convert the fonts by navigating to the fontoutput folder, then run the script make a bunch of web fonts to use in your web pages:
 
-	
-	coolperson@linux:fontoutput/:$ ../bin/convertFonts.sh --autohint *.ttf
+Like this:
 
+	coolperson@linux:fontoutput/:$ ../bin/convertFonts.sh --autohint *.ttf
 
 Running #2 will produces all kinda of files in your fontoutput folder, including a CSS stylesheet that you can use to include these fonts in your website. Keep the 'hinted' files and copy those to your site, these are the ones that have been subsetted and converted.
 
