@@ -1,3 +1,14 @@
+Example usage:
+
+For one font:
+
+ilikefonts@linux$ python ./bin/subset.py --subset=latin --script --strip_names --new LibreCaslonText-Regular.ttf
+
+For Many fonts:
+
+for font in `ls -1 *otf | cut -d. -f1`; do /usr/bin/python2 ./bin/subset.py --script --strip_names --new $font.otf $font.ttf; done;
+
+
 subset.py - A script for subsetting a font, using FontForge
 ===========================================================
 

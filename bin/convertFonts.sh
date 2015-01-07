@@ -16,7 +16,7 @@
 # Uncomment the line below with the right directories.  Remember the 
 # $PATH at the beginning of the string, or the script will forget what
 # was originally in the PATH.
-PATH="$PATH:/home/lemur/convfon/bin/"
+PATH="$PATH:/home/yourname/pathtothisfolder/bin/"
 
 
 #########################################################################
