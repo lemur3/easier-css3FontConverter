@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Easier-css3fontconverter by lemur3</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Easier-css3fontconverter</h1>
+        <h2>An attempt to make the use of css3FontConverter a bit easier. css3FontConverter is a shell script that can use other command line tools to produce @font-face compatible fonts in all browsers. Works under Windows (using Cygwin), Mac OS X and Linux</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/lemur3/easier-css3FontConverter/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/lemur3/easier-css3FontConverter/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/lemur3/easier-css3FontConverter" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h3>
+<a id="this-is-a-forkcollection-of-binaries-to-use-css3-font-converter-created-by-zoltan-hawryluk" class="anchor" href="#this-is-a-forkcollection-of-binaries-to-use-css3-font-converter-created-by-zoltan-hawryluk" aria-hidden="true"><span class="octicon octicon-link"></span></a>This is a fork/collection of binaries to use <em>CSS3 Font Converter</em> Created by Zoltan Hawryluk.</h3>
+
+<p>It is a tool that makes 'web fonts' for use on your internet webpages. The end result is sort of like the output of Font Squirrel, but not nearly as easy to use.</p>
+
+<p>It supports .ttf or .otf fonts.</p>
+
+<p>You can read the original page about this <a href="http://www.useragentman.com/blog/2011/02/20/converting-font-face-fonts-quickly-in-any-os/">here</a>.</p>
+
+<p>You can view their github repo <a href="https://github.com/zoltan-dulac/css3FontConverter">here</a>.</p>
+
+<p>While Zoltan has done some great work, trying to find all of the various dependencies and components is a big pain.</p>
+
+<p>Hopefully what I've done here will be of use to someone. The binaries were assembled on an Arch Linux i386 32-bit build, and hopefully will work for others.</p>
+
+<p>Using this big collection of stuff isn't exactly straight forward but there are two important documents that you might need.</p>
+
+<p>I've included the original 'readme' from Zoltan as well as the 'readme' from an awesome subsetting script for fontforge created by, Mikhail Kashkin, Raph Levien, and Dave Crossland of Google.</p>
+
+<hr>
+
+<h4>
+<a id="dependencies-that-youll-need-to-install" class="anchor" href="#dependencies-that-youll-need-to-install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependencies that you'll need to install:</h4>
+
+<ul>
+<li>fontforge (compiled to run python scripts, and its depends)</li>
+<li>ttfautohint (and its depends - only if you want your fonts hinted.. many fonts will look like crap without this)</li>
+<li>python2.x (and whatever it depends on)</li>
+</ul>
+
+<hr>
+
+<h3>
+<a id="here-is-the-way-i-go-about-using-this" class="anchor" href="#here-is-the-way-i-go-about-using-this" aria-hidden="true"><span class="octicon octicon-link"></span></a>Here is the way I go about using this:</h3>
+
+<h5>
+<a id="first-i-subset-the-fonts" class="anchor" href="#first-i-subset-the-fonts" aria-hidden="true"><span class="octicon octicon-link"></span></a>First I subset the fonts</h5>
+
+<ol>
+<li><p>Place the font(s) I want to convert in the fonts folder.</p></li>
+<li><p>Subset the font(s) using commands like these two:</p></li>
+</ol>
+
+<p>For one font:</p>
+
+<pre><code>coolperson@linux:fontconv/:$ python2.7 ./bin/subset.py --subset=latin --script --strip_names --new ./fonts/LibreCaslon.ttf ./fontoutput/LibreCaslon-subset.ttf
+</code></pre>
+
+<p>For many fonts go inside of the fonts folder and run something like this:</p>
+
+<pre><code>coolperson@linux:fonts/:$ for font in `ls -1 *ttf | cut -d. -f1`; do /usr/bin/python2.7 ../bin/subset.py --subset=latin --script --strip_names $font.ttf ../fontoutput/$font.ttf; done; 
+</code></pre>
+
+<h5>
+<a id="then-i-convert-the-fonts-into-the-svg-woff-woff2-etc" class="anchor" href="#then-i-convert-the-fonts-into-the-svg-woff-woff2-etc" aria-hidden="true"><span class="octicon octicon-link"></span></a>Then I convert the fonts into the .svg, .woff, .woff2, etc..</h5>
+
+<ol>
+<li><p>Edit the convertFonts.sh file in the bin/ folder to point to the correct path for all of the binaries and scripts (including wherever you've installed fontforge).</p></li>
+<li>
+<p>Use CSS3FontConverter to convert the fonts by navigating to the fontoutput folder, then run the script make a bunch of web fonts to use in your web pages:</p>
+
+<p>coolperson@linux:fontoutput/:$ ../bin/convertFonts.sh --autohint *.ttf</p>
+</li>
+</ol>
+
+<p>Running #2 will produces all kinda of files in your fontoutput folder, including a CSS stylesheet that you can use to include these fonts in your website. Keep the 'hinted' files and copy those to your site, these are the ones that have been subsetted and converted.</p>
+
+<hr>
+
+<h3>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Notes:</h3>
+
+<ul>
+<li><p>You'll see all kinds of crazy text scroll past when you use these scripts. So long as the fonts that come out seem to appear correctly when you open them in your OS, all should be good.</p></li>
+<li><p>You'll need fontforge to have been compiled with python scripting. The default fontforge that installed from the arch packages worked for me. </p></li>
+<li><p>Also, fontforge requires python 2.x to use with scripting, 3.x will not work.</p></li>
+<li><p>I have no idea what the file called "old" is that gets generated upon using the CSS3FontConverter script. You can safely ignore it (I think).</p></li>
+<li><p>The original css3FontConverter contains a folder of about 80megabytes worth of opensource fonts to mess about with, along with example output from the tools. It is included here as well.</p></li>
+</ul>
+
+<hr>
+
+<p>I've done little more than collect/build some binaries and figure out how to use this all (which was a bit of work).</p>
+
+<p>the credit goes to those who actually made it.... you can visit the blog/original repo for more info on the stuff used for licenses and all the relate stuff..</p>
+
+<hr>
+
+<p>CSS3 <a href="https://github.com/font-face" class="user-mention">@font-face</a> Converter v2.1 by Zoltan Hawryluk (<a href="http://www.useragentman.com">http://www.useragentman.com</a>) More info available at <a href="http://useragentman.com/blog/8QtbI">http://useragentman.com/blog/8QtbI</a></p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
