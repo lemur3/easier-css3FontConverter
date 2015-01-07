@@ -28,6 +28,8 @@ I've included the original 'readme' from Zoltan as well as the 'readme' from an 
 
 ###Here is the way I go about using this:
 
+#####First I subset the fonts
+
 1. Place the font(s) I want to convert in the fonts folder.
 
 2. Subset the font(s) using commands like these two:
@@ -40,13 +42,15 @@ For many fonts go inside of the fonts folder and run something like this:
 
 	coolperson@linux:fonts/:$ for font in `ls -1 *ttf | cut -d. -f1`; do /usr/bin/python2.7 ../bin/subset.py --subset=latin --script --strip_names $font.ttf ../fontoutput/$font.ttf; done; 
 
-3. Edit the convertFonts.sh file in the bin/ folder to point to the correct path for all of the binaries and scripts (including wherever you've installed fontforge).
+#####Then I convert the fonts into the .svg, .woff, .woff2, etc..
 
-4. Use CSS3FontConverter to convert the fonts by navigating to the fontoutput folder, then run the script make a bunch of web fonts to use in your web pages:
+1. Edit the convertFonts.sh file in the bin/ folder to point to the correct path for all of the binaries and scripts (including wherever you've installed fontforge).
+
+2. Use CSS3FontConverter to convert the fonts by navigating to the fontoutput folder, then run the script make a bunch of web fonts to use in your web pages:
 
 	coolperson@linux:fontoutput/:$ ../bin/convertFonts.sh --autohint *.ttf
 
-Running #4 will produced all kinda of files in your fontoutput folder, including a CSS stylesheet that you can use to include these fonts in your website. Keep the 'hinted' files and copy those to your site, these are the ones that have been subsetted and converted.
+Running #2 will produces all kinda of files in your fontoutput folder, including a CSS stylesheet that you can use to include these fonts in your website. Keep the 'hinted' files and copy those to your site, these are the ones that have been subsetted and converted.
 
 -----------
 
