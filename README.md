@@ -18,11 +18,11 @@ I've included the original 'readme' from Zoltan as well as the 'readme' from an 
 
 ---------
 
-Dependencies that you'll need to install:
+####Dependencies that you'll need to install:
 
-fontforge (compiled to run python scripts, and its depends)
-ttfautohint (and its depends - only if you want your fonts hinted.. many fonts will look like crap without this)
-python2.x (and whatever it depends on)
+* fontforge (compiled to run python scripts, and its depends)
+* ttfautohint (and its depends - only if you want your fonts hinted.. many fonts will look like crap without this)
+* python2.x (and whatever it depends on)
 
 ---------
 
